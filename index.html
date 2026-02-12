@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Valentine's Day Dear <b> Sunshine</b> ❤️</title>
+    <title>Happy Valentine's Day, Sunshine! ❤️</title>
     <style>
         * {
             margin: 0;
@@ -12,100 +12,36 @@
         }
 
         body {
-            font-family: 'Georgia', serif;
-            background: linear-gradient(135deg, #ff6b9d, #c44569, #ff9ff3);
-            min-height: 100vh;
-            overflow-x: hidden;
+            font-family: 'Arial', sans-serif;
+            height: 100vh;
+            overflow: hidden;
+            background: linear-gradient(45deg, #ff6b6b, #feca57, #ff9ff3, #54a0ff);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
-            color: white;
+            position: relative;
         }
 
-        .container {
-            text-align: center;
-            max-width: 600px;
-            padding: 20px;
-            animation: fadeIn 2s ease-in;
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
-        h1 {
-            font-size: 4rem;
-            margin-bottom: 20px;
-            background: linear-gradient(45deg, #fff, #ffd1dc);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-shadow: 0 0 20px rgba(255,255,255,0.5);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        h1:hover {
-            transform: scale(1.1);
-            text-shadow: 0 0 30px #ff69b4;
-        }
-
-        .heart {
-            font-size: 3rem;
-            animation: heartbeat 1.5s ease-in-out infinite;
-            display: block;
-            margin: 20px 0;
-        }
-
-        @keyframes heartbeat {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.2); }
-        }
-
-        .message {
-            font-size: 1.4rem;
-            line-height: 1.6;
-            margin: 30px 0;
-            opacity: 0;
-            animation: slideUp 1s ease-out 0.5s forwards;
-        }
-
-        .love-note {
-            background: rgba(255,255,255,0.2);
-            padding: 30px;
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.3);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-        }
-
-        .love-note:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 30px 60px rgba(0,0,0,0.2);
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .floating-hearts {
-            position: fixed;
-            top: 0;
-            left: 0;
+        .hearts {
+            position: absolute;
             width: 100%;
             height: 100%;
             pointer-events: none;
-            z-index: -1;
+            overflow: hidden;
         }
 
-        .heart-float {
+        .heart {
             position: absolute;
-            font-size: 1.5rem;
-            color: #ff69b4;
+            font-size: 2rem;
+            color: rgba(255,255,255,0.8);
             animation: float 6s linear infinite;
         }
 
@@ -120,43 +56,140 @@
             }
         }
 
-        @media (max-width: 768px) {
-            h1 { font-size: 2.5rem; }
-            .message { font-size: 1.2rem; }
-            .heart { font-size: 2rem; }
+        .card {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            padding: 60px 40px;
+            max-width: 500px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            transform: translateY(100px);
+            animation: cardSlide 2s ease-out 1s forwards;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 480px) {
+            .card {
+                padding: 40px 20px;
+                margin: 20px;
+                max-width: none;
+                width: 90vw;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .message {
+                font-size: 1.1rem;
+            }
+            
+            .heart-big {
+                font-size: 3rem;
+            }
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,107,107,0.1), transparent);
+            transform: rotate(45deg);
+            animation: shimmer 3s linear infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        @keyframes cardSlide {
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        .heart-big {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            animation: heartbeat 1.5s ease-in-out infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #e91e63;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .message {
+            font-size: 1.3rem;
+            color: #333;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .your-name {
+            font-size: 1.1rem;
+            color: #666;
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+
+        .love-button {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a52);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .love-button:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 10px 30px rgba(255,107,107,0.4);
         }
     </style>
 </head>
 <body>
-    <div class="floating-hearts" id="hearts"></div>
+    <div class="hearts" id="hearts"></div>
     
-    <div class="container">
-        <h1>Happy Valentine's Day! ❤️</h1>
-        <div class="heart">💖</div>
-        
-        <div class="love-note">
-            <div class="message">
-                My dearest love,<br><br>
-                Every heartbeat whispers your name. 
-                You are my sunshine, my stars, my everything. 
-                Here's to us, to love, to forever. 💕
-            </div>
-        </div>
-        
-        <div class="heart">💕</div>
-        <p style="margin-top: 20px; font-size: 1.1rem;">
-            Hover over the message to feel the magic! ✨
+    <div class="card">
+        <div class="heart-big">💖</div>
+        <h1>Happy Valentine's Day, Sunshine! ☀️</h1>
+        <p class="message">
+            My dearest <strong>Sunshine</strong>, you light up my world brighter than the sun itself. 
+            Every moment with you feels magical. 
+            I love you more than words can express, today and every day. 💕
         </p>
+        <p class="your-name">Forever yours,<br><strong>Mr Rijal</strong></p>
+        <button class="love-button" onclick="showHearts()">I Love You Too, Sunshine! 💝</button>
     </div>
 
     <script>
         // Create floating hearts
         function createHeart() {
             const heart = document.createElement('div');
-            heart.className = 'heart-float';
-            heart.innerHTML = ['💖', '💕', '💗', '❤️'][Math.floor(Math.random() * 4)];
+            heart.className = 'heart';
+            heart.innerHTML = ['💖', '💕', '💗', '💝', '💘', '☀️'][Math.floor(Math.random() * 6)];
             heart.style.left = Math.random() * 100 + '%';
             heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
+            heart.style.fontSize = (Math.random() * 1 + 1) + 'rem';
+            
             document.getElementById('hearts').appendChild(heart);
             
             setTimeout(() => {
@@ -164,16 +197,31 @@
             }, 7000);
         }
 
-        // Generate hearts continuously
         setInterval(createHeart, 300);
 
-        // Add click effect
-        document.querySelector('.love-note').addEventListener('click', function() {
-            this.style.transform = 'scale(0.98)';
-            setTimeout(() => {
-                this.style.transform = '';
-            }, 150);
-        });
+        // Extra hearts on button click
+        function showHearts() {
+            for(let i = 0; i < 25; i++) {
+                setTimeout(createHeart, i * 100);
+            }
+            
+            // Shake animation
+            const card = document.querySelector('.card');
+            card.style.animation = 'none';
+            card.offsetHeight; // Trigger reflow
+            card.style.animation = 'shake 0.5s ease-in-out';
+        }
+
+        // Add shake keyframes
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes shake {
+                0%, 100% { transform: translateX(0); }
+                25% { transform: translateX(-10px); }
+                75% { transform: translateX(10px); }
+            }
+        `;
+        document.head.appendChild(style);
     </script>
 </body>
 </html>
